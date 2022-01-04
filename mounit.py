@@ -38,13 +38,13 @@ async def on_ready():
     quote = get_quote()
     status = "[LAPTOP] UP! <@ADMIN_USER_ID>" #Let the admin know
     await channel.send(status)
-#    async with aiohttp.ClientSession() as session:
-#      request = await session.get('https://aws.random.cat/meow') # Make a request
-#      catjson = await request.json() # Convert it to a JSON dictionary
-#    embed = discord.Embed(title="up!", color=discord.Color.purple())
-#    embed.set_image(url=catjson['file']) # Set the embed image to the value of the 'file' key
-#    embed.set_footer(text=(quote))
-#    await channel.send(embed=embed) # Send the embed
+    async with aiohttp.ClientSession() as session:
+      request = await session.get('https://aws.random.cat/meow') # Make a request
+      catjson = await request.json() # Convert it to a JSON dictionary
+    embed = discord.Embed(title="up!", color=discord.Color.purple())
+    embed.set_image(url=catjson['file']) # Set the embed image to the value of the 'file' key
+    embed.set_footer(text=(quote))
+    await channel.send(embed=embed) # Send the embed
     print("Started Reading JSON file")
     test.start()
 
