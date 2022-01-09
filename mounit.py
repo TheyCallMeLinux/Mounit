@@ -11,12 +11,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 bot = commands.Bot(command_prefix="!")
-minTime = 300 #minimum time in seconds
-maxTime = 1600 #maximum time in seconds
+minTime = 300 #minimum time in seconds between each random sentences iterations
+maxTime = 1600 #maximum time in secondsbetween each random sentences iterations
+chanid = CHANNELID_HERE #Discord Channel ID
+adminid = ADMINID_HERE #Discord USER Admin ID
 
 @tasks.loop(seconds=random.randint(minTime, maxTime))
 async def test():
-    channel = bot.get_channel(CHANNEL_ID)
+    channel = bot.get_channel(chanid)
     with open('./sentences-en.json') as f:
         data = json.loads(f.read())
         sentences = str(random.choice(data))
@@ -34,9 +36,9 @@ async def on_ready():
     
     print(f'{bot.user} succesfully logged in!') #Console message
     await bot.change_presence(activity=discord.Game(name="Learning about the human race")) #Discord presence (game, watching, listening)
-    channel = bot.get_channel(CHANNEL_ID)
+    channel = bot.get_channel(chanid)
     quote = get_quote()
-    status = "[LAPTOP] UP! <@ADMIN_USER_ID>" #Let the admin know
+    status = (f"<@{adminid}> the machine is up!") #Let the admin know
     await channel.send(status)
     async with aiohttp.ClientSession() as session:
       request = await session.get('https://aws.random.cat/meow') # Make a request
@@ -57,14 +59,15 @@ async def on_message(message):
         await message.channel.send(f'Hi {message.author.nick}')
     if message.content == 'bye':
         await message.channel.send(f'Goodbye {message.author.nick}')
-    if message.content == "test":
-        logmess = "Command test ran by"+str({message.author.nick})+"at:"+str(datetime.datetime.now())+"\n"
+    if message.content == "news":
+        logmess = "Command news ran by"+str({message.author.nick})+"at:"+str(datetime.datetime.now())+"\n"
         f=open("log.txt", "a+")
         f.write(logmess)
-        game=discord.Game(name="testing stuff")
+        game=discord.Game(name="Reading the news")
+        nmbr_msgs = 1
         await bot.change_presence(activity=game)
-        while x < 5:
-            await message.channel.send("""test!""")
+        while x < nmbr_msgs:
+            await message.channel.send("""https://news.ycombinator.com/""")
             x=x+1
         else:
             return
