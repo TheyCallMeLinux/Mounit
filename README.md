@@ -6,6 +6,15 @@ Setup
 The script starts by loading environment variables from a .env file using the dotenv package. It then creates a discord.ext.commands.Bot instance to interact with the Discord API.
 Variables
 
+Requirements:
+pip install python-dotenv
+pip install discord
+
+Config the edit dotENV file:
+ADMINID=<ADMINISTRATOR_DISCORD_ID>
+CHANNELID=<CHANNELID>
+DISCORD_TOKEN=<DISCORD_BOT_TOKEN>
+
 The following variables are defined in the script:
 
     minTime: The minimum time in seconds between each iteration of the test task.
