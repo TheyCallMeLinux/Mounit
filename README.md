@@ -17,6 +17,10 @@ Config the edit dotENV file:
     CHANNELID=<CHANNELID>
     DISCORD_TOKEN=<DISCORD_BOT_TOKEN>
 
+__________________________________________________
+
+Rundown:
+
 The following variables are defined in the script:
 
     minTime: The minimum time in seconds between each iteration of the test task.
