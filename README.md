@@ -14,22 +14,22 @@ Variables
 
 Make sure you have Python 3.6 or newer installed on your system (example uses python3.8). If you don't have it installed, you can download it using the following command in your terminal:
 
-apt install python3.8
+    apt install python3.8
 
 Install pip, the Python package manager, if you don't already have it. You can do this by running the following command in your terminal:
 
-apt install python3-pip
+    apt install python3-pip
 
 Once pip is installed, you can use it to install the required libraries for discord. To do this, run the following command in your terminal:
 
-pip3 install -U discord
-pip3 install -U discord.py
-pip3 install -U python-dotenv
-pip3 install -U aiohttp
+    pip3 install -U discord
+    pip3 install -U discord.py
+    pip3 install -U python-dotenv
+    pip3 install -U aiohttp
     
 Or
 
-pip install -U discord.py aiohttp python-dotenv
+    pip install -U discord.py aiohttp python-dotenv
     
     
 
