@@ -19,6 +19,8 @@ minTime = 300
 maxTime = 1600
 channelid = os.getenv("CHANNELID")
 adminid = os.getenv("ADMINID")
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+
 
 if minTime >= maxTime:
     raise ValueError("maxTime must be greater than minTime")
@@ -57,7 +59,6 @@ async def on_ready():
     status = (f"<@{adminid}> the machine is up!") #Let the admin know
     await channel.send(status)
     async with aiohttp.ClientSession() as session:
-      # Use HTTPS to protect the data transmitted in the request
       request = await session.get('https://aws.random.cat/meow') # Make a request
       catjson = await request.json() # Convert it to a JSON dictionary
     embed = discord.Embed(title="up!", color=discord.Color.purple())
@@ -76,11 +77,28 @@ async def on_message(message):
         await message.channel.send(f"Hi {message.author.nick}")
     elif message.content == "bye":
         await message.channel.send(f"Goodbye {message.author.nick}")
-    elif message.content == "news":
-        logmess = "Command news ran by"+str({message.author.nick})+"at:"+str(datetime.datetime.now())+"\n"
-        f=open("log.txt", "a+")
-        f.write(logmess)
-        await message.channel.send("http://www.bbc.com/news/world")
+    if message.content == "news":
+        # Set the API endpoint URL
+        API_ENDPOINT = "https://newsapi.org/v2/top-headlines?country=us&category=technology"
+
+        # Set the headers
+        headers = {
+            "X-Api-Key": NEWS_API_KEY
+        }
+
+        # Make the request to the API
+        response = requests.get(API_ENDPOINT, headers=headers)
+
+        # Parse the response
+        response_json = response.json()
+
+        # Loop through the articles and post each one in the Discord channel
+    for article in response_json["articles"]:
+            # Check if the description is not empty
+        if article["description"]:
+            await message.channel.send(article["title"])
+            await message.channel.send(article["description"])
+            await message.channel.send(article["url"])
     if message.content == "hackernews":
         # Get the top stories from Hacker News
         response = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json")
