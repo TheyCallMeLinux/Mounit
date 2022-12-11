@@ -1,7 +1,8 @@
 # Mounit
 
 This script is a Discord bot written in Python that uses the discord.py library to interact with the Discord API and implement various features.
-Setup
+
+Intro:
 
 The script starts by loading environment variables from a .env file using the dotenv package. It then creates a discord.ext.commands.Bot instance to interact with the Discord API.
 Variables
