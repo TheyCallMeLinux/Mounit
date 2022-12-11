@@ -47,19 +47,23 @@ Create or edit the .env file in the same directory as the script and add the fol
     ADMINID=<ADMINISTRATOR_DISCORD_ID>
     CHANNELID=<YOUR_DISCORD_CHANNEL_ID>
 
-__________________________________________________
+
 
 ## Rundown:
 
 The following variables are defined in the script:
 
 ***minTime***: The minimum time in seconds between each iteration of the test task.
+
 ***maxTime***: The maximum time in seconds between each iteration of the test task.
+
 ***channelid***: The Discord channel ID where the bot will post messages.
+
 ***adminid***: The Discord user ID of the bot's administrator.
 
-Functions
 
+
+## Functions
 The following functions are defined in the script:
 
  ***test task***: This task will run in the background and will send a random sentence from the sentences-en.json file to the specified Discord channel at random intervals (between minTime and maxTime seconds).
