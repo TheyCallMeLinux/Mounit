@@ -1,3 +1,5 @@
+(MONIT NEEDS UPDATE! Stay in touch for updates)
+
 # Mounit
 
 This script is a Discord bot written in Python that uses the discord.py library to interact with the Discord API and implement various features.
