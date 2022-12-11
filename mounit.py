@@ -103,9 +103,13 @@ async def on_message(message):
             return
 
         # Loop through the list of articles in the response
-        for article in response_json["articles"]:
-            # Send the news article to the channel
-            await message.channel.send(article["url"])
+        for i, article in enumerate(response_json["articles"]):
+	    # Send the news article to the channel only if the current index is less than 5
+            if i < 5:
+                await message.channel.send(article["url"])
+
+
+
     if message.content == "hackernews":
         # Get the top stories from Hacker News
         response = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json")
