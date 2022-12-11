@@ -1,4 +1,4 @@
-(MONIT NEEDS UPDATE! Stay in touch for updates)
+(BETA)
 
 # Mounit
 
