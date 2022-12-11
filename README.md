@@ -6,10 +6,16 @@
 
 This script is a Discord bot written in Python that uses the discord.py library to interact with the Discord API and implement various features.
 
-## Intro:
 
-The script starts by loading environment variables from a .env file using the dotenv package. It then creates a discord.ext.commands.Bot instance to interact with the Discord API.
-Variables
+## Features
+
+-   The bot will automatically post a random sentence from the `sentences-en.json` file in a specified channel every 5-25 minutes.
+-   The bot will post a random quote and a cat image in the specified channel when it starts up.
+-   The bot can respond to the following commands:
+    -   `hello`: The bot will respond with "Hi <user>"
+    -   `bye`: The bot will respond with "Goodbye <user>"
+    -   `news`: The bot will respond with a link to the BBC news website
+
 
 ## Requirements:
 
@@ -73,3 +79,7 @@ The following functions are defined in the script:
 ***on_ready***: This event handler will be called when the bot has successfully connected to the Discord API and is ready to receive messages. This function sends a message to the specified Discord channel to let the administrator know that the bot is up and running, and also sets the bot's presence on Discord. It also sends a random quote to the Discord channel, along with a random cat image from the aws.random.cat API.
 
 ***on_message***: This event handler will be called whenever the bot receives a message on Discord. The function first checks if the message was sent by the bot itself, and if so, it does nothing. Otherwise, the function checks if the message content is one of a few predefined strings (e.g. "hello", "bye", "news"). If the message matches one of these strings, the bot will respond with a predefined message.
+
+## License
+
+This project is licensed under the MIT License
