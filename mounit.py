@@ -1,4 +1,3 @@
-from typing import Text
 import discord, asyncio, random
 from discord.ext import commands, tasks
 import aiohttp
@@ -82,7 +81,29 @@ async def on_message(message):
         f=open("log.txt", "a+")
         f.write(logmess)
         await message.channel.send("http://www.bbc.com/news/world")
+    if message.content == "hackernews":
+        # Get the top stories from Hacker News
+        response = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json")
+        top_stories = response.json()
+        # Create a message with the top stories
+        news_message = "Here are the top stories from Hacker News:\n\n"
+        for story_id in top_stories[:10]:
+            # Get the details for each story
+            story_response = requests.get(f"https://hacker-news.firebaseio.com/v0/item/{story_id}.json")
+            story_details = story_response.json()
+
+            # Check if the story has a URL
+            if "url" in story_details:
+                # Add the story title and URL to the message
+                news_message += f"{story_details['title']}: {story_details['url']}\n"
+            else:
+                # Handle the case where the story does not have a URL
+                news_message += f"{story_details['title']}: (no URL available)\n"
+
+        # Send the message to the same channel where the "hackernews" message was sent
+        await message.channel.send(news_message)
     else:
         return
+
 
 bot.run(TOKEN)
