@@ -1,36 +1,46 @@
+
 (BETA)
 
 # Mounit
 
 This script is a Discord bot written in Python that uses the discord.py library to interact with the Discord API and implement various features.
 
-Intro:
+## Intro:
 
 The script starts by loading environment variables from a .env file using the dotenv package. It then creates a discord.ext.commands.Bot instance to interact with the Discord API.
 Variables
 
-Requirements:
+## Requirements:
 
 Make sure you have Python 3.6 or newer installed on your system (example uses python3.8). If you don't have it installed, you can download it using the following command in your terminal:
 
-    apt install python3.8
+apt install python3.8
 
 Install pip, the Python package manager, if you don't already have it. You can do this by running the following command in your terminal:
 
-    apt install python3-pip
+apt install python3-pip
 
 Once pip is installed, you can use it to install the required libraries for discord. To do this, run the following command in your terminal:
 
-    pip3 install -U discord
-    pip3 install -U discord.py
-    pip3 install -U python-dotenv
-    pip3 install -U aiohttp
+pip3 install -U discord
+pip3 install -U discord.py
+pip3 install -U python-dotenv
+pip3 install -U aiohttp
     
 Or
 
-    pip install -U discord.py aiohttp python-dotenv
+pip install -U discord.py aiohttp python-dotenv
     
-Config or create the edit .env file:
+    
+
+## Running the bot
+
+To run the bot, follow these steps:
+Create a new bot on Discord and get the token by following these instructions.
+https://discordnet.dev/guides/getting_started/first-bot.html
+
+Create or edit the .env file in the same directory as the script and add the following environment variables:
+
 
     TOKEN=<DISCORD_BOT_TOKEN_SECRET>
     ADMINID=<ADMINISTRATOR_DISCORD_ID>
@@ -38,7 +48,7 @@ Config or create the edit .env file:
 
 __________________________________________________
 
-Rundown:
+## Rundown:
 
 The following variables are defined in the script:
 
