@@ -86,18 +86,25 @@ async def on_message(message):
             "X-Api-Key": NEWS_API_KEY
         }
 
-        # Make the request to the API
+        # Send the request
         response = requests.get(API_ENDPOINT, headers=headers)
 
-        # Parse the response
+        # Check if the response was successful
+        if response.status_code != 200:
+            print("Error: Failed to fetch news")
+            return
+
+        # Convert the response to a JSON object
         response_json = response.json()
 
-        # Loop through the articles and post each one in the Discord channel
-    for article in response_json["articles"]:
-            # Check if the description is not empty
-        if article["description"]:
-            await message.channel.send(article["title"])
-            await message.channel.send(article["description"])
+        # Make sure that the 'response_json' variable has been assigned a value
+        if response_json is None:
+            print("Error: 'response_json' is not defined")
+            return
+
+        # Loop through the list of articles in the response
+        for article in response_json["articles"]:
+            # Send the news article to the channel
             await message.channel.send(article["url"])
     if message.content == "hackernews":
         # Get the top stories from Hacker News
