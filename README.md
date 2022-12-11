@@ -28,7 +28,7 @@ The following variables are defined in the script:
 
     minTime: The minimum time in seconds between each iteration of the test task.
     maxTime: The maximum time in seconds between each iteration of the test task.
-    chanid: The Discord channel ID where the bot will post messages.
+    channelid: The Discord channel ID where the bot will post messages.
     adminid: The Discord user ID of the bot's administrator.
 
 Functions
