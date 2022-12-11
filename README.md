@@ -82,4 +82,19 @@ The following functions are defined in the script:
 
 ## License
 
-This project is licensed under the MIT License
+**This project is licensed under the MIT License**
+
+> *The MIT License is a super flexible and chill open-source license that lets you do whatever you want with your code, as long as you're
+> not a total jerk and give credit where it's due. Basically, it's like
+> the "Live and let live" of software licenses. Other developers can
+> take your code, modify it, and even make their own versions of it. And
+> all they have to do is include a copy of the MIT License with their
+> code and say "Thanks, nerd!"*
+> 
+> *In short, the MIT License is like the cool older sibling of software licenses. It's not strict, it's not uptight, and it lets you have all
+> the freedom you need to do your own thing. Plus, it's short and sweet,
+> so you don't have to read a whole novel just to understand what you
+> can and can't do with your code.*
+> 
+> -chat.openai
+
