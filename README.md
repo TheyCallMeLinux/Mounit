@@ -14,11 +14,11 @@ Requirements:
     pip install python-dotenv
     pip install discord
 
-Config the edit dotENV file:
+Config or create the edit .env file:
 
+    TOKEN=<DISCORD_BOT_TOKEN_SECRET>
     ADMINID=<ADMINISTRATOR_DISCORD_ID>
-    CHANNELID=<CHANNELID>
-    DISCORD_TOKEN=<DISCORD_BOT_TOKEN>
+    CHANNELID=<YOUR_DISCORD_CHANNEL_ID>
 
 __________________________________________________
 
