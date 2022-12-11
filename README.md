@@ -24,7 +24,11 @@ Once pip is installed, you can use it to install the required libraries for disc
     pip3 install -U discord
     pip3 install -U discord.py
     pip3 install -U python-dotenv
-    sudo pip3 install -U aiohttp
+    pip3 install -U aiohttp
+    
+Or
+
+    pip install -U discord.py aiohttp python-dotenv
     
 Config or create the edit .env file:
 
