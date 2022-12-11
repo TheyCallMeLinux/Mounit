@@ -11,9 +11,20 @@ Variables
 
 Requirements:
 
-    pip install python-dotenv
-    pip install discord
+Make sure you have python3.8 installed on your system. If you don't have it installed, you can download it using the following command in your terminal:
 
+    apt install python3.8
+
+Install pip, the Python package manager, if you don't already have it. You can do this by running the following command in your terminal:
+
+    apt install python3-pip
+
+Once pip is installed, you can use it to install the required libraries for discord. To do this, run the following command in your terminal:
+
+    pip3 install -U discord
+    pip3 install -U discord.py
+    pip3 install -U python-dotenv
+    
 Config or create the edit .env file:
 
     TOKEN=<DISCORD_BOT_TOKEN_SECRET>
