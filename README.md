@@ -15,6 +15,7 @@ This little guy might not have all the bells and whistles of some of the other b
     -   `hello`: The bot will respond with "Hi <user>"
     -   `bye`: The bot will respond with "Goodbye <user>"
     -   `news`: The bot will respond with a link to the BBC news website
+    -   `hackernews`: The bot will get the top stories from Hacker News
 
 
 ## Requirements:
