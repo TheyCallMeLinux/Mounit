@@ -4,28 +4,42 @@ from discord.ext import commands, tasks
 import aiohttp
 import datetime
 import requests
+import secrets
 import json
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-bot = commands.Bot(command_prefix="!")
-minTime = 300 #minimum time in seconds between each random sentences iterations
-maxTime = 1600 #maximum time in secondsbetween each random sentences iterations
-chanid = CHANNELID_HERE #Discord Channel ID
-adminid = ADMINID_HERE #Discord USER Admin ID
+# Get the Discord token from the environment
+TOKEN = os.getenv("TOKEN")
 
-@tasks.loop(seconds=random.randint(minTime, maxTime))
+bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
+
+minTime = 300
+maxTime = 1600
+channelid = os.getenv("CHANNELID")
+adminid = os.getenv("ADMINID")
+
+if minTime >= maxTime:
+    raise ValueError("maxTime must be greater than minTime")
+
+# Use the secrets module to generate cryptographically secure random numbers
+@tasks.loop(seconds=secrets.randbelow(maxTime) + minTime)
 async def test():
-    channel = bot.get_channel(chanid)
+    channel = bot.get_channel(int(channelid))
+    if channel is None:
+        print("Error: Invalid channel ID")
+        return
     with open('./sentences-en.json') as f:
         data = json.loads(f.read())
-        sentences = str(random.choice(data))
-        print (sentences)
-    await channel.send(sentences)
+        sentences = random.choice(data)
+        print(sentences)
+    # Use the discord.utils.escape_markdown() function to escape any special characters in the generated sentences
+    await channel.send(discord.utils.escape_markdown(sentences))
 
 def get_quote():
+  # Use HTTPS to protect the data transmitted in the request
   response = requests.get("https://zenquotes.io/api/random")
   json_data = json.loads(response.text)
   quote = json_data[0]['q'] + " -" + json_data[0]['a']
@@ -36,11 +50,15 @@ async def on_ready():
     
     print(f'{bot.user} succesfully logged in!') #Console message
     await bot.change_presence(activity=discord.Game(name="Learning about the human race")) #Discord presence (game, watching, listening)
-    channel = bot.get_channel(chanid)
+    channel = bot.get_channel(int(channelid))
+    if channel is None:
+        print("Error: Invalid channel ID")
+        return
     quote = get_quote()
     status = (f"<@{adminid}> the machine is up!") #Let the admin know
     await channel.send(status)
     async with aiohttp.ClientSession() as session:
+      # Use HTTPS to protect the data transmitted in the request
       request = await session.get('https://aws.random.cat/meow') # Make a request
       catjson = await request.json() # Convert it to a JSON dictionary
     embed = discord.Embed(title="up!", color=discord.Color.purple())
@@ -52,24 +70,19 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    x=0
-    if message.author == bot.user:   
+    if message.author == bot.user:
         return
-    if message.content == 'hello':
-        await message.channel.send(f'Hi {message.author.nick}')
-    if message.content == 'bye':
-        await message.channel.send(f'Goodbye {message.author.nick}')
-    if message.content == "news":
+
+    if message.content == "hello":
+        await message.channel.send(f"Hi {message.author.nick}")
+    elif message.content == "bye":
+        await message.channel.send(f"Goodbye {message.author.nick}")
+    elif message.content == "news":
         logmess = "Command news ran by"+str({message.author.nick})+"at:"+str(datetime.datetime.now())+"\n"
         f=open("log.txt", "a+")
         f.write(logmess)
-        game=discord.Game(name="Reading the news")
-        nmbr_msgs = 1
-        await bot.change_presence(activity=game)
-        while x < nmbr_msgs:
-            await message.channel.send("""https://news.ycombinator.com/""")
-            x=x+1
-        else:
-            return
+        await message.channel.send("http://www.bbc.com/news/world")
+    else:
+        return
 
-bot.run(os.getenv("DISCORD_TOKEN"))
+bot.run(TOKEN)
