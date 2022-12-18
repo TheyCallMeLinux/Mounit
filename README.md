@@ -12,6 +12,7 @@ This little guy might not have all the bells and whistles of some of the other b
 -   The bot will automatically post a random sentence from the `sentences-en.json` file in a specified channel every 5-25 minutes.
 -   The bot will post a random quote and a cat image in the specified channel when it starts up.
 -   The bot can respond to the following commands:
+    -   `ping`: The bot will respond with the current latency"
     -   `hello`: The bot will respond with "Hi <user>"
     -   `bye`: The bot will respond with "Goodbye <user>"
     -   `news`: The bot will respond with the Top headlines from Newsapi.org in the technology category
