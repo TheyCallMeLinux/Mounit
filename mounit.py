@@ -73,6 +73,42 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
+    if message.content == "wallpaper":
+        random_number = random.randint(1, 100)
+        image_url = f"https://minimalistic-wallpaper.demolab.com/?random={random_number}"
+        embed = discord.Embed(color=discord.Colour.orange())
+        embed.set_image(url=image_url)
+        msg = await message.channel.send(embed=embed)
+
+        await msg.add_reaction("⬅️")
+        await msg.add_reaction("➡️")
+
+        def check(reaction, user):
+            return user == message.author and str(reaction.emoji) in ["⬅️", "➡️"]
+
+        while True:
+            try:
+                reaction, user = await bot.wait_for("reaction_add", check=check, timeout=120)
+            except asyncio.TimeoutError:
+                break
+            else:
+                await reaction.remove(user)
+                if str(reaction.emoji) == "➡️":
+                    random_number = random.randint(1, 100)
+                    image_url = f"https://minimalistic-wallpaper.demolab.com/?random={random_number}"
+                    embed = discord.Embed(color="#FF69B4", image=image_url)
+                    await msg.edit(embed=embed)
+                    await msg.add_reaction("⬅️")
+                    await msg.add_reaction("➡️")
+                elif str(reaction.emoji) == "⬅️":
+                    random_number = random.randint(1, 100)
+                    image_url = f"https://minimalistic-wallpaper.demolab.com/?random={random_number}"
+                    embed = discord.Embed(color="#FF69B4", image=image_url)
+                    await msg.edit(embed=embed)
+                    await msg.add_reaction("⬅️")
+                    await msg.add_reaction("➡️")
+
+
     if message.content == "anime":
         random_number = randint(1, 107)
         url = f"https://hdqwalls.com/category/anime-wallpapers/page/{random_number}"
