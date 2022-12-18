@@ -8,6 +8,8 @@ import math
 import json
 import os
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup
+from random import randint
 
 load_dotenv()
 
@@ -40,7 +42,6 @@ async def test():
     await channel.send(discord.utils.escape_markdown(sentences))
 
 def get_quote():
-  # Use HTTPS to protect the data transmitted in the request
   response = requests.get("https://zenquotes.io/api/random")
   json_data = json.loads(response.text)
   quote = json_data[0]['q'] + " -" + json_data[0]['a']
@@ -72,8 +73,65 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
+    if message.content == "anime":
+        random_number = randint(1, 107)
+        url = f"https://hdqwalls.com/category/anime-wallpapers/page/{random_number}"
+        response = requests.get(url)
+        html = response.text
+        soup = BeautifulSoup(html, 'html.parser')
+        images = []
+
+        for img in soup.find_all('img', class_="thumbnail img-responsive custom_width"):
+            images.append(img['src'])
+
+        limit = len(images)
+        pg = 0
+
+        #embed = discord.Embed(color="#FF69B4")
+        embed = discord.Embed(color=discord.Colour(value=int("FF69B4", 16)))
+        embed.set_image(url=images[0].replace("/thumb", ""))
+
+        msg = await message.channel.send(embed=embed)
+
+        await msg.add_reaction("⬅️")
+        await msg.add_reaction("➡️")
+
+        def check(reaction, user):
+            return user == message.author and str(reaction.emoji) in ["⬅️", "➡️"]
+
+        while True:
+            try:
+                reaction, user = await bot.wait_for('reaction_add', timeout=120.0, check=check)
+            except asyncio.TimeoutError:
+                break
+            else:
+                if str(reaction.emoji) == "➡️":
+                    if not images[pg + 1]:
+                        pg = pg
+                    else:
+                        pg = pg + 1
+                    #embed = discord.Embed(color="#FF69B4")
+                    embed = discord.Embed(color=discord.Colour(value=int("FF69B4", 16)))
+                    embed.set_image(url=images[pg].replace("/thumb", ""))
+                    await msg.edit(embed=embed)
+                    await msg.remove_reaction("➡️", user)
+                    await msg.add_reaction("⬅️")
+                    await msg.add_reaction("➡️")
+                elif str(reaction.emoji) == "⬅️":
+                    if not images[pg - 1]:
+                        pg = pg
+                    else:
+                        pg = pg - 1
+                    #embed = discord.Embed(color="#FF69B4")
+                    embed = discord.Embed(color=discord.Colour(value=int("FF69B4", 16)))
+                    embed.set_image(url=images[pg].replace("/thumb", ""))
+                    await msg.edit(embed=embed)
+                    await msg.remove_reaction("⬅️", user)
+                    await msg.add_reaction("⬅️")
+                    await msg.add_reaction("➡️")
+
     #basic math functions (sqrt, sin, cos, tan, pi).
-    if message.content.startswith("!calc "):
+    elif message.content.startswith("!calc "):
         try:
             equation = message.content[6:]
             result = eval(equation, {"__builtins__": None}, {"sqrt": math.sqrt, "sin": math.sin, "cos": math.cos, "tan": math.tan, "pi": math.pi})
@@ -86,6 +144,7 @@ async def on_message(message):
     elif message.content.find("quote") != -1:
         quote = get_quote()
         await message.channel.send(quote)
+
 
     elif message.content == "hello":
         await message.channel.send(f"Hi {message.author.nick}")
@@ -143,7 +202,9 @@ async def on_message(message):
 
         # Send the message to the same channel where the "hackernews" message was sent
         await message.channel.send(news_message)
+
     else:
         return
+
 
 bot.run(TOKEN)
