@@ -73,8 +73,16 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
+    if message.content == "ping":
+       startTime = datetime.datetime.now()
+       sentMessage = await message.channel.send("Pinging...")
+       latency = (datetime.datetime.now() - startTime).total_seconds() * 1000
+       await sentMessage.edit(content="Pong! Latency is {} ms.".format(int(latency)))
+
     if message.content == "wallpaper":
-        random_number = random.randint(1, 100)
+        # Initialize the random_number variable to 1
+        random_number = 1
+
         image_url = f"https://minimalistic-wallpaper.demolab.com/?random={random_number}"
         embed = discord.Embed(color=discord.Colour.orange())
         embed.set_image(url=image_url)
@@ -94,16 +102,20 @@ async def on_message(message):
             else:
                 await reaction.remove(user)
                 if str(reaction.emoji) == "➡️":
-                    random_number = random.randint(1, 100)
+                    random_number += 1
                     image_url = f"https://minimalistic-wallpaper.demolab.com/?random={random_number}"
-                    embed = discord.Embed(color="#FF69B4", image=image_url)
+                    #embed = discord.Embed(color="#FF69B4", image=image_url)
+                    embed = discord.Embed(color=discord.Colour.orange())
+                    embed.set_image(url=image_url)
                     await msg.edit(embed=embed)
                     await msg.add_reaction("⬅️")
                     await msg.add_reaction("➡️")
                 elif str(reaction.emoji) == "⬅️":
-                    random_number = random.randint(1, 100)
+                    random_number -= 1
                     image_url = f"https://minimalistic-wallpaper.demolab.com/?random={random_number}"
-                    embed = discord.Embed(color="#FF69B4", image=image_url)
+                    #embed = discord.Embed(color="#FF69B4", image=image_url)
+                    embed = discord.Embed(color=discord.Colour.orange())
+                    embed.set_image(url=image_url)
                     await msg.edit(embed=embed)
                     await msg.add_reaction("⬅️")
                     await msg.add_reaction("➡️")
