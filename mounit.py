@@ -73,7 +73,11 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content == "hello":
+    if message.content.find("quote") != -1:
+        quote = get_quote()
+        await message.channel.send(quote)
+
+    elif message.content == "hello":
         await message.channel.send(f"Hi {message.author.nick}")
     elif message.content == "bye":
         await message.channel.send(f"Goodbye {message.author.nick}")
