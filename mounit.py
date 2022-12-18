@@ -4,6 +4,7 @@ import aiohttp
 import datetime
 import requests
 import secrets
+import math
 import json
 import os
 from dotenv import load_dotenv
@@ -20,7 +21,6 @@ maxTime = 1600
 channelid = os.getenv("CHANNELID")
 adminid = os.getenv("ADMINID")
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
-
 
 if minTime >= maxTime:
     raise ValueError("maxTime must be greater than minTime")
@@ -48,7 +48,6 @@ def get_quote():
 
 @bot.event
 async def on_ready():
-    
     print(f'{bot.user} succesfully logged in!') #Console message
     await bot.change_presence(activity=discord.Game(name="Learning about the human race")) #Discord presence (game, watching, listening)
     channel = bot.get_channel(int(channelid))
@@ -73,7 +72,18 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content.find("quote") != -1:
+    #basic math functions (sqrt, sin, cos, tan, pi).
+    if message.content.startswith("!calc "):
+        try:
+            equation = message.content[6:]
+            result = eval(equation, {"__builtins__": None}, {"sqrt": math.sqrt, "sin": math.sin, "cos": math.cos, "tan": math.tan, "pi": math.pi})
+        except Exception:
+            await message.channel.send("Error: Invalid equation")
+            return
+
+        await message.channel.send(result)
+
+    elif message.content.find("quote") != -1:
         quote = get_quote()
         await message.channel.send(quote)
 
@@ -112,8 +122,6 @@ async def on_message(message):
             if i < 5:
                 await message.channel.send(article["url"])
 
-
-
     if message.content == "hackernews":
         # Get the top stories from Hacker News
         response = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json")
@@ -137,6 +145,5 @@ async def on_message(message):
         await message.channel.send(news_message)
     else:
         return
-
 
 bot.run(TOKEN)
