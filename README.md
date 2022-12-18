@@ -16,7 +16,8 @@ This little guy might not have all the bells and whistles of some of the other b
     -   `bye`: The bot will respond with "Goodbye <user>"
     -   `news`: The bot will respond with the Top headlines from Newsapi.org in the technology category
     -   `hackernews`: The bot will get the top stories from Hacker News
-
+    -   `!calc`: Performs a mathematical calculation using the eval() function.
+    -   `quote`: Sends a random quote from zenquotes.io.
 
 ## Requirements:
 
