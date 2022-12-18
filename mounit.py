@@ -79,47 +79,53 @@ async def on_message(message):
        latency = (datetime.datetime.now() - startTime).total_seconds() * 1000
        await sentMessage.edit(content="Pong! Latency is {} ms.".format(int(latency)))
 
-    if message.content == "wallpaper":
-        # Initialize the random_number variable to 1
-        random_number = 1
 
-        image_url = f"https://minimalistic-wallpaper.demolab.com/?random={random_number}"
-        embed = discord.Embed(color=discord.Colour.orange())
+    if message.content == 'wallpaper':
+        # Get the list of wallpaper file names
+        response = requests.get('https://api.github.com/repos/DenverCoder1/minimalistic-wallpaper-collection/contents/images')
+        wallpaper_filenames = [item['name'] for item in response.json()]
+
+        # Choose a random wallpaper file
+        random_filename = random.choice(wallpaper_filenames)
+        image_url = f'https://github.com/DenverCoder1/minimalistic-wallpaper-collection/raw/main/images/{random_filename}'
+
+        embed = discord.Embed(color=discord.Color.orange())
         embed.set_image(url=image_url)
         msg = await message.channel.send(embed=embed)
 
-        await msg.add_reaction("⬅️")
-        await msg.add_reaction("➡️")
+        await msg.add_reaction('⬅️')
+        await msg.add_reaction('➡️')
 
         def check(reaction, user):
-            return user == message.author and str(reaction.emoji) in ["⬅️", "➡️"]
+            return user == message.author and str(reaction.emoji) in ['⬅️', '➡️']
 
         while True:
             try:
-                reaction, user = await bot.wait_for("reaction_add", check=check, timeout=120)
+                reaction, user = await bot.wait_for('reaction_add', check=check, timeout=120)
             except asyncio.TimeoutError:
                 break
             else:
                 await reaction.remove(user)
-                if str(reaction.emoji) == "➡️":
-                    random_number += 1
-                    image_url = f"https://minimalistic-wallpaper.demolab.com/?random={random_number}"
-                    #embed = discord.Embed(color="#FF69B4", image=image_url)
-                    embed = discord.Embed(color=discord.Colour.orange())
+                if str(reaction.emoji) == '➡️':
+                    # Choose the next wallpaper file in the list
+                    current_index = wallpaper_filenames.index(random_filename)
+                    random_filename = wallpaper_filenames[(current_index + 1) % len(wallpaper_filenames)]
+                    image_url = f'https://github.com/DenverCoder1/minimalistic-wallpaper-collection/raw/main/images/{random_filename}'
+                    embed = discord.Embed(color=discord.Color.orange())
                     embed.set_image(url=image_url)
                     await msg.edit(embed=embed)
-                    await msg.add_reaction("⬅️")
-                    await msg.add_reaction("➡️")
-                elif str(reaction.emoji) == "⬅️":
-                    random_number -= 1
-                    image_url = f"https://minimalistic-wallpaper.demolab.com/?random={random_number}"
-                    #embed = discord.Embed(color="#FF69B4", image=image_url)
-                    embed = discord.Embed(color=discord.Colour.orange())
+                    await msg.add_reaction('⬅️')
+                    await msg.add_reaction('➡️')
+                elif str(reaction.emoji) == '⬅️':
+                    # Choose the previous wallpaper file in the list
+                    current_index = wallpaper_filenames.index(random_filename)
+                    random_filename = wallpaper_filenames[(current_index - 1) % len(wallpaper_filenames)]
+                    image_url = f'https://github.com/DenverCoder1/minimalistic-wallpaper-collection/raw/main/images/{random_filename}'
+                    embed = discord.Embed(color=discord.Color.orange())
                     embed.set_image(url=image_url)
                     await msg.edit(embed=embed)
-                    await msg.add_reaction("⬅️")
-                    await msg.add_reaction("➡️")
-
+                    await msg.add_reaction('⬅️')
+                    await msg.add_reaction('➡️')
 
     if message.content == "anime":
         random_number = randint(1, 107)
