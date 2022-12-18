@@ -18,7 +18,8 @@ This little guy might not have all the bells and whistles of some of the other b
     -   `hackernews`: The bot will get the top stories from Hacker News
     -   `!calc`: Performs a mathematical calculation using the eval() function.
     -   `quote`: Sends a random quote from zenquotes.io.
-    -   `anime` : This is a Discord bot command that sends a random anime wallpaper then navigate by reacting to the message with "⬅️" or "➡️" emotes. 
+    -   `wallpaper` : Sends a random minimalistic wallpaper then navigate by reacting to the message with "⬅️" or "➡️" emotes. 
+    -   `anime` : Sends a random anime wallpaper then navigate by reacting to the message with "⬅️" or "➡️" emotes. 
 
 ## Requirements:
 
