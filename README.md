@@ -35,6 +35,7 @@ Once pip is installed, you can use it to install the required libraries for disc
     pip3 install -U discord.py
     pip3 install -U python-dotenv
     pip3 install -U aiohttp
+    pip3 install -U beautifulsoup4
 
     
 Or
