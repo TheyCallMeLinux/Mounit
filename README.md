@@ -79,6 +79,18 @@ The following functions are defined in the script:
 
 ***on_message***: This event handler will be called whenever the bot receives a message on Discord. The function first checks if the message was sent by the bot itself, and if so, it does nothing. Otherwise, the function checks if the message content is one of a few predefined strings (e.g. "hello", "bye", "news"). If the message matches one of these strings, the bot will respond with a predefined message.
 
+## Docker
+You **must** configure the .env to suits your need first! 
+
+Then run:
+
+    docker build -t mounit
+
+    docker run --rm mounit 
+    
+( or "docker run --rm -d mounit"  , for detached mode)
+
+
 ## License
 
 **This project is licensed under the MIT License**
