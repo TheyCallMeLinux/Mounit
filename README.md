@@ -109,3 +109,8 @@ Then run:
 > 
 > -chat.openai
 
+## Privacy Policy and Terms of Service
+
+According to other repository on Github, Discord legally requires me to make one of these.
+
+There isn't really anything to note. No personal data is stored. I am also not responsible if you modify the code and you break it or abuse a third-party service. You assume full responsibility by running or modifying the code
