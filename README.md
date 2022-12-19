@@ -4,7 +4,7 @@
 
 # Mounit
 
-This little guy might not have all the bells and whistles of some of the other bots out there, but what he lacks in features he makes up for in pure, unadulterated fun. Whether he's sending out random sentences, quoting your favorite philosophers,post top stories from Hacker News, or just chatting with your users, Mounit is sure to keep things interesting. So if you're looking for a low-maintenance and configurable bot that's all about having a good time, give Mounit a try!
+This little guy might not have all the bells and whistles of some of the other bots out there, but what he lacks in features he makes up for in pure, unadulterated fun. Whether he's sending out random sentences, quoting your favorite philosophers, post top stories from Hacker News, or just chatting with your users, Mounit is sure to keep things interesting. So if you're looking for a low-maintenance and configurable bot that's all about having a good time, give Mounit a try!
 
 
 ## Features
