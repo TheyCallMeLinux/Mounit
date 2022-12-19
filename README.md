@@ -34,16 +34,8 @@ Install pip, the Python package manager, if you don't already have it. You can d
 
 Once pip is installed, you can use it to install the required libraries for discord. To do this, run the following command in your terminal:
 
-    pip3 install -U discord
-    pip3 install -U discord.py
-    pip3 install -U python-dotenv
-    pip3 install -U aiohttp
-    pip3 install -U beautifulsoup4
 
-    
-Or
-
-    pip install -U discord.py aiohttp python-dotenv
+    pip3 install -U discord.py aiohttp python-dotenv requests beautifulsoup4
     
     
 
