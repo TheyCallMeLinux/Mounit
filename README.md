@@ -22,6 +22,13 @@ This little guy might not have all the bells and whistles of some of the other b
     -   `wallpaper` : Sends a random minimalistic wallpaper then navigate by reacting to the message with "⬅️" or "➡️" emotes. 
     -   `anime` : Sends a random anime wallpaper then navigate by reacting to the message with "⬅️" or "➡️" emotes. 
 
+
+## Screenshots
+
+![image](https://user-images.githubusercontent.com/25093857/208541132-073b3995-ba21-4816-bc0a-d8ef3502563c.png)
+![image](https://user-images.githubusercontent.com/25093857/208540953-1acd2b11-bb52-4e31-bb1b-c9bf170be912.png)
+![image](https://user-images.githubusercontent.com/25093857/208541260-b19cb3a7-220b-4cb7-86a7-d8a2cded6fe4.png)
+
 ## Requirements:
 
 Make sure you have Python 3.6 or newer installed on your system (example uses python3.8). If you don't have it installed, you can download it using the following command in your terminal:
