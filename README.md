@@ -51,7 +51,7 @@ Create or edit the .env file in the same directory as the script and add the fol
     TOKEN=<DISCORD_BOT_TOKEN_SECRET>
     ADMINID=<ADMINISTRATOR_DISCORD_ID>
     CHANNELID=<YOUR_DISCORD_CHANNEL_ID>
-
+    NEWS_API_KEY=<YOUR_NEWS_API_KEY> (it's free!)
 
 
 ## Rundown:
