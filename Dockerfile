@@ -1,26 +1,22 @@
 FROM alpine:latest
 
-# Use the --no-cache flag to prevent the Docker daemon from using cached layers
+# update and add the necessary packages with the --no-cache flag
 RUN apk update --no-cache && apk add --no-cache git python3
-
-# Use the --build-arg flag to pass a build-time variable
-# that specifies the required packages
-ARG PACKAGES="git python3"
-
-# Install the required packages
-RUN apk add --no-cache $PACKAGES
-
-# Ensure that pip is installed
 RUN python3 -m ensurepip
 
-COPY requirements.txt .
+# create and switch to the /app directory
+RUN mkdir /app
+WORKDIR /app
 
-# Install the required Python packages
+# copy the requirements file and install the dependencies
+COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
+# copy the .env, sentences-en.json and mounit.py files into the /app directory
 COPY .env .
-COPY sentences-en.json .
 COPY mounit.py .
+COPY sentences-en.json .
 
+# set the entrypoint and command to run the python script inside the /app directory
 ENTRYPOINT ["python3"]
 CMD ["mounit.py"]
