@@ -2,6 +2,4 @@ discord.py
 aiohttp
 python-dotenv
 requests
-psutil
-python-secrets
 beautifulsoup4
