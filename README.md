@@ -66,7 +66,7 @@ You **must** configure the .env to suits your need first!
 
 Then run:
 
-    docker build -t mounit
+    docker build -t mounit .
 
     docker run --rm mounit 
     
