@@ -10,6 +10,8 @@ RUN pip3 install -r requirements.txt
 
 COPY .env .
 
+COPY sentences-en.json .
+
 COPY mounit.py .
 
 ENTRYPOINT ["python3"]
