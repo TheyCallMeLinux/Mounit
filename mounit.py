@@ -73,14 +73,14 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content == "ping":
+    if message.content == "!ping":
        startTime = datetime.datetime.now()
        sentMessage = await message.channel.send("Pinging...")
        latency = (datetime.datetime.now() - startTime).total_seconds() * 1000
        await sentMessage.edit(content="Pong! Latency is {} ms.".format(int(latency)))
 
 
-    if message.content == 'wallpaper':
+    if message.content == '!wallpaper':
         # Get the list of wallpaper file names
         response = requests.get('https://api.github.com/repos/DenverCoder1/minimalistic-wallpaper-collection/contents/images')
         wallpaper_filenames = [item['name'] for item in response.json()]
@@ -127,7 +127,7 @@ async def on_message(message):
                     await msg.add_reaction('⬅️')
                     await msg.add_reaction('➡️')
 
-    if message.content == "anime":
+    if message.content == "!anime":
         random_number = randint(1, 107)
         url = f"https://hdqwalls.com/category/anime-wallpapers/page/{random_number}"
         response = requests.get(url)
@@ -184,7 +184,7 @@ async def on_message(message):
                     await msg.add_reaction("⬅️")
                     await msg.add_reaction("➡️")
 
-    if message.content.startswith("purge"):
+    if message.content.startswith("!purge"):
         number_str = message.content[len("purge"):].strip()
         try:
             number = int(number_str)
@@ -221,7 +221,7 @@ async def on_message(message):
         await message.channel.send(f"Hi {message.author.nick}")
     elif message.content == "bye":
         await message.channel.send(f"Goodbye {message.author.nick}")
-    if message.content == "news":
+    if message.content == "!news":
         # Set the API endpoint URL
         API_ENDPOINT = "https://newsapi.org/v2/top-headlines?country=us&category=technology"
 
@@ -252,7 +252,7 @@ async def on_message(message):
             if i < 5:
                 await message.channel.send(article["url"])
 
-    if message.content == "hackernews":
+    if message.content == "!hackernews":
         # Get the top stories from Hacker News
         response = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json")
         top_stories = response.json()
