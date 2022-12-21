@@ -184,6 +184,23 @@ async def on_message(message):
                     await msg.add_reaction("⬅️")
                     await msg.add_reaction("➡️")
 
+    if message.content.startswith("purge"):
+        number_str = message.content[len("purge"):].strip()
+        try:
+            number = int(number_str)
+        except ValueError:
+            return await message.channel.send("Invalid number of messages to delete.")
+
+        if number < 1 or number > 100:
+            return await message.channel.send("Number of messages to delete must be between 1 and 100.")
+    
+        # delete the command message
+        await message.delete()
+
+        # delete the specified number of messages
+        await message.channel.purge(limit=number+1)
+
+
     #basic math functions (sqrt, sin, cos, tan, pi).
     elif message.content.startswith("!calc "):
         try:
